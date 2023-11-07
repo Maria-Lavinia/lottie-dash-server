@@ -11,11 +11,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
-        host: configService.get('localhost'),
-        port: +configService.get<number>('5432'),
-        username: configService.get('postgres'),
-        password: configService.get('060994'),
-        database: configService.get('db_lottie_animations'),
+        host: configService.get('DB_HOST'),
+        port: +configService.get<number>('DB_PORT'),
+        username: configService.get('DB_USERNAME'),
+        password: configService.get('DB_PASSWORD'),
+        database: configService.get('DB_NAME'),
         autoLoadEntities: true,
         synchronize: true, // Setting synchronize: true shouldn't be used in production - otherwise you can lose production data.
       }),
