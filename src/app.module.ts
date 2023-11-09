@@ -4,6 +4,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { User } from './users/entities/user.entity';
+import { AuthModule } from './authentication/auth.module';
+import { UsersModule } from './users/users.module';
+import { APP_FILTER } from '@nestjs/core/';
+import { SignupExceptionFilter } from './users/signup.exception-filter';
 
 @Module({
   imports: [
@@ -23,8 +27,16 @@ import { User } from './users/entities/user.entity';
       }),
       inject: [ConfigService],
     }),
+    AuthModule,
+    UsersModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_FILTER,
+      useClass: SignupExceptionFilter,
+    },
+  ],
 })
 export class AppModule {}
