@@ -1,5 +1,6 @@
 import { Catch, ExceptionFilter, ArgumentsHost } from '@nestjs/common';
 import { Response } from 'express';
+
 @Catch(Error)
 export class SignupExceptionFilter implements ExceptionFilter {
   catch(error: Error, host: ArgumentsHost) {
@@ -11,6 +12,11 @@ export class SignupExceptionFilter implements ExceptionFilter {
       response.status(status).json({
         error: 'EmailAlreadyExists',
         message: 'Sign-up failed. Email already exists.',
+      });
+    } else if (error.message === 'Invalid email domain') {
+      response.status(status).json({
+        error: 'InvalidEmailDomain',
+        message: 'Sign-up failed. Invalid email domain.',
       });
     } else {
       response.status(status).json({

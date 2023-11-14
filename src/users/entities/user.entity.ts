@@ -1,5 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 import { IsEmail, IsNotEmpty } from 'class-validator';
+import { OneToOne, ManyToOne, OneToMany } from 'typeorm';
+import { DevEntity } from './dev.entity';
+import { AdminEntity } from './admin.entity';
+import { Role } from '../roles/role.enum';
 
 @Entity()
 export class User {
@@ -22,4 +26,13 @@ export class User {
   @IsNotEmpty()
   @Column()
   lastName: string;
+
+  @OneToOne((type) => DevEntity, (dev) => dev.user)
+  dev: DevEntity | null;
+
+  @OneToOne((type) => AdminEntity, (admin) => admin.user)
+  admin: AdminEntity | null;
+
+  @Column({ type: 'enum', enum: Role, default: Role.User })
+  role: Role | null;
 }

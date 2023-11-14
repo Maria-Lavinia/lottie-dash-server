@@ -14,11 +14,23 @@ import { CreateUserDto } from 'src/users/entities/create-user.dto';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @Post('/signup')
-  async signup(@Req() req, @Body() createUserDto: CreateUserDto) {
+  // @Post('/signup')
+  // async signup(@Req() req, @Body() createUserDto: CreateUserDto) {
+  //   console.log(createUserDto);
+  //   return this.authService.signup(createUserDto);
+  // }
+
+  @Post('/signupdev')
+  async signupTenant(@Req() req, @Body() createUserDto: CreateUserDto) {
     console.log(createUserDto);
-    return this.authService.signup(createUserDto);
+    return this.authService.signupDev(createUserDto);
   }
+
+  @Post('/signupadmin')
+  async signupBoardMember(@Req() req, @Body() createUserDto: CreateUserDto) {
+    return this.authService.signupAdmin(createUserDto);
+  }
+
   // login
   @UseGuards(LocalAuthGuard)
   @Post('/login')

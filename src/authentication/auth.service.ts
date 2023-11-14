@@ -12,8 +12,12 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async signup(createUserDto: CreateUserDto) {
-    return this.usersService.createUser(createUserDto);
+  async signupDev(createUserDto: CreateUserDto) {
+    return this.usersService.createDev(createUserDto);
+  }
+
+  async signupAdmin(createUserDto: CreateUserDto) {
+    return this.usersService.createAdmin(createUserDto);
   }
 
   async validateUser(username: string, pass: string): Promise<any> {
@@ -35,9 +39,17 @@ export class AuthService {
   async login(user: User) {
     let payload: any = {
       username: user.email,
+      id: user.id,
     };
 
+    if (user.dev) {
+      payload.devId = user.dev.id;
+    } else if (user.admin) {
+      payload.adminId = user.admin.id;
+    }
+
     return {
+      id: payload.id,
       access_token: this.jwtService.sign(payload),
     };
   }
