@@ -34,10 +34,13 @@ export class UsersService {
     return savedUser;
   }
 
+  findAll() {
+    return this.userRepository.find();
+  }
+
   async findUserById(id: number): Promise<User> {
     return this.userRepository.findOne({
       where: { id: id },
-      relations: ['apartmentInfo'],
     });
   }
 
@@ -66,5 +69,9 @@ export class UsersService {
 
     const updated = Object.assign(toUpdate, updateUserDto);
     return await this.userRepository.save(updated);
+  }
+
+  async remove(id: number) {
+    return await this.userRepository.delete(id);
   }
 }

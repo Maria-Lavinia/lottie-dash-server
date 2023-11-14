@@ -15,10 +15,10 @@ import { UpdateUserDto } from './entities/update-user.dto';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  // @Get()
-  // findAll() {
-  //   return this.usersService.findAll();
-  // }
+  @Get()
+  findAll() {
+    return this.usersService.findAll();
+  }
 
   // @UseGuards(JwtAuthGuard)
   @Get(':id')
@@ -30,10 +30,9 @@ export class UsersController {
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(+id, updateUserDto);
   }
-  // @Delete(':id')
-  // async removeBoardMember(
-  //   @Param('id') id: number,
-  // ): Promise<{ message: string }> {
-  //   return this.usersService.removeUserAndRelatedEntities(id);
-  // }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.usersService.remove(+id);
+  }
 }
