@@ -6,6 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { User } from './users/entities/user.entity';
 import { AuthModule } from './authentication/auth.module';
 import { UsersModule } from './users/users.module';
+import { AnimationsModule } from './animations/animations.module';
 import { APP_FILTER } from '@nestjs/core/';
 import { SignupExceptionFilter } from './users/signup.exception-filter';
 
@@ -29,6 +30,7 @@ import { SignupExceptionFilter } from './users/signup.exception-filter';
     }),
     AuthModule,
     UsersModule,
+    AnimationsModule,
   ],
   controllers: [AppController],
   providers: [

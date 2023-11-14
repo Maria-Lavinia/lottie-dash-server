@@ -1,9 +1,10 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 import { IsEmail, IsNotEmpty } from 'class-validator';
-import { OneToOne, ManyToOne, OneToMany } from 'typeorm';
+import { OneToOne, OneToMany } from 'typeorm';
 import { DevEntity } from './dev.entity';
 import { AdminEntity } from './admin.entity';
 import { Role } from '../roles/role.enum';
+import { AnimationEntity } from '../../animations/entities/animation.entity';
 
 @Entity()
 export class User {
@@ -35,4 +36,7 @@ export class User {
 
   @Column({ type: 'enum', enum: Role, default: Role.User })
   role: Role | null;
+
+  @OneToMany((type) => AnimationEntity, (animations) => animations)
+  animations: AnimationEntity[];
 }
