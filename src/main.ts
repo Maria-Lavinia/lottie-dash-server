@@ -12,7 +12,7 @@ async function bootstrap() {
     AppModule,
     new ExpressAdapter(),
   );
-
+  app.enableCors();
   await app.listen(3005);
 }
 bootstrap();
