@@ -9,16 +9,12 @@ import {
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
 import { CreateUserDto } from 'src/users/entities/create-user.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
-
-  // @Post('/signup')
-  // async signup(@Req() req, @Body() createUserDto: CreateUserDto) {
-  //   console.log(createUserDto);
-  //   return this.authService.signup(createUserDto);
-  // }
 
   @Post('/signupdev')
   async signupTenant(@Req() req, @Body() createUserDto: CreateUserDto) {

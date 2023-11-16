@@ -17,7 +17,9 @@ import { AuthGuard } from '@nestjs/passport';
 import { AnimationsService } from './animations.service';
 import { CreateAnimationsDto } from './entities/create-animation.dto';
 import { readFile } from 'fs/promises';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('animations')
 @Controller('animations')
 export class AnimationsController {
   constructor(private readonly animationsService: AnimationsService) {}
