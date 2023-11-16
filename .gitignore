@@ -2,7 +2,7 @@
 /dist
 /node_modules
 .env
-/upload/animations
+/uploads/animations
 # Logs
 logs
 *.log
