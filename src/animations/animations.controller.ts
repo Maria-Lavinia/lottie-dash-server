@@ -47,19 +47,15 @@ export class AnimationsController {
   async create(@UploadedFile() file, @Req() req, @Body() body) {
     try {
       console.log('Received request body:', body);
-
-      // Assuming you have the user ID in the request (you may need to modify this based on your setup)
       const userId = body?.userId;
 
       // Perform null or undefined checks for other properties
       const fileName = body?.fileName;
       const projectName = body?.projectName;
-      // const jsonData = body?.jsonData;
 
       console.log('userId:', userId);
       console.log('fileName:', fileName);
       console.log('projectName:', projectName);
-      // console.log('jsonData:', jsonData);
 
       if (userId && fileName && projectName && file) {
         // Create a new AnimationEntity and associate it with the user
