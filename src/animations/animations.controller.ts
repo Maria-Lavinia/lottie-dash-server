@@ -104,4 +104,9 @@ export class AnimationsController {
   delete(@Req() req) {
     return this.animationsService.delete(req.params.id);
   }
+
+  @Get('userAnimations/:id')
+  findAllByUser(@Req() req) {
+    return this.animationsService.findAllByUserId(req.params.id);
+  }
 }

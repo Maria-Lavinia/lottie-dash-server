@@ -44,7 +44,9 @@ export class AnimationsService {
       where: { user: { id: userId } },
     });
   }
-
+  findAllByUserId(id: number): Promise<AnimationEntity[]> {
+    return this.animationRepository.find({ where: { user: { id } } });
+  }
   async findByFileName(fileName: string) {
     return await this.animationRepository.find({ where: { fileName } });
   }
