@@ -40,6 +40,7 @@ export class AuthService {
     let payload: any = {
       username: user.email,
       id: user.id,
+      role: user.role,
     };
 
     if (user.dev) {
@@ -49,6 +50,7 @@ export class AuthService {
     }
 
     return {
+      role: payload.role,
       id: payload.id,
       access_token: this.jwtService.sign(payload),
     };
