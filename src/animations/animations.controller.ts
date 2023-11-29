@@ -9,6 +9,7 @@ import {
   Req,
   Body,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
@@ -108,5 +109,15 @@ export class AnimationsController {
   @Get('userAnimations/:id')
   findAllByUser(@Req() req) {
     return this.animationsService.findAllByUserId(req.params.id);
+  }
+
+  @Get('filter/projectName')
+  findByProjectName(@Query('projectName') projectName: string) {
+    return this.animationsService.filterByProjectName(projectName);
+  }
+
+  @Get('search/fileName')
+  findByFileName(@Query('fileName') fileName: string) {
+    return this.animationsService.searchByFileName(fileName);
   }
 }

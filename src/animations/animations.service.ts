@@ -1,7 +1,7 @@
 // animation.service.ts
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, ILike } from 'typeorm';
 import { AnimationEntity } from './entities/animation.entity';
 import { User } from 'src/users/entities/user.entity';
 // import { HttpService } from '@nestjs/axios';
@@ -47,14 +47,24 @@ export class AnimationsService {
   findAllByUserId(id: number): Promise<AnimationEntity[]> {
     return this.animationRepository.find({ where: { user: { id } } });
   }
-  async findByFileName(fileName: string) {
-    return await this.animationRepository.find({ where: { fileName } });
-  }
-  async findByProjectName(projectName: string) {
-    return await this.animationRepository.find({ where: { projectName } });
-  }
 
   async delete(id: number) {
     return await this.animationRepository.delete(id);
+  }
+
+  async filterByProjectName(projectName: string): Promise<AnimationEntity[]> {
+    return await this.animationRepository.find({
+      where: {
+        projectName: ILike(`%${projectName}%`),
+      },
+    });
+  }
+
+  async searchByFileName(fileName: string): Promise<AnimationEntity[]> {
+    return await this.animationRepository.find({
+      where: {
+        fileName: ILike(`%${fileName}%`), //case insensitive
+      },
+    });
   }
 }
