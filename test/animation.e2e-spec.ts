@@ -77,15 +77,15 @@ describe('UserController (e2e)', () => {
       const anim1 = await animationRepository.insert(createDto1);
 
       // Act
-      const { body: retrievedIssue }: { body: AnimationEntity } = await request(
+      const { body: retrievedAnim }: { body: AnimationEntity } = await request(
         app.getHttpServer(),
       )
         .get(`/animations/${anim1.identifiers[0].id}`)
         .expect(200);
 
       // Assert
-      expect(retrievedIssue.id).toEqual(anim1.identifiers[0].id);
-      expect(retrievedIssue.fileName).toEqual('testuser5@frankly.dk');
+      expect(retrievedAnim.id).toEqual(anim1.identifiers[0].id);
+      expect(retrievedAnim.fileName).toEqual('testuser5@frankly.dk');
     });
   });
 

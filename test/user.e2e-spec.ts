@@ -65,25 +65,25 @@ describe('UserController (e2e)', () => {
         'Test',
         '123456',
       );
-      const createDto2 = new CreateUserDto(
-        'testuser4@frankly.dk',
-        'Maria',
-        'Test',
-        '123456',
-      );
+      // const createDto2 = new CreateUserDto(
+      //   'testuser4@frankly.dk',
+      //   'Maria',
+      //   'Test',
+      //   '123456',
+      // );
 
       const user1 = await userRepository.insert(createDto1);
 
       // Act
-      const { body: retrievedIssue }: { body: User } = await request(
+      const { body: retrievedUser }: { body: User } = await request(
         app.getHttpServer(),
       )
         .get(`/users/${user1.identifiers[0].id}`)
         .expect(200);
 
       // Assert
-      expect(retrievedIssue.id).toEqual(user1.identifiers[0].id);
-      expect(retrievedIssue.firstName).toEqual('Maria');
+      expect(retrievedUser.id).toEqual(user1.identifiers[0].id);
+      expect(retrievedUser.firstName).toEqual('Maria');
     });
   });
 
