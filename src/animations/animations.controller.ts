@@ -111,13 +111,23 @@ export class AnimationsController {
     return this.animationsService.findAllByUserId(req.params.id);
   }
 
-  @Get('filter/projectName')
-  findByProjectName(@Query('projectName') projectName: string) {
-    return this.animationsService.filterByProjectName(projectName);
-  }
+  // @Get('filter/projectName')
+  // findByProjectName(@Query('projectName') projectName: string) {
+  //   return this.animationsService.filterByProjectName(projectName);
+  // }
 
   @Get('search/fileName')
   findByFileName(@Query('fileName') fileName: string) {
     return this.animationsService.searchByFileName(fileName);
+  }
+  @Get('search')
+  filterByProjectNameAndFileName(
+    @Query('fileName') fileName?: string,
+    @Query('projectName') projectName?: string,
+  ) {
+    return this.animationsService.filterByProjectNameAndFileName(
+      fileName,
+      projectName,
+    );
   }
 }

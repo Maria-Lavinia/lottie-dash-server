@@ -22,7 +22,7 @@ import { AnimationEntity } from './animations/entities/animation.entity';
         port: +configService.get<number>('DB_PORT'),
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
-        database: configService.get('DB_NAME'),
+        database: configService.get('DB_TEST_NAME'),
         autoLoadEntities: true,
         entities: [User, AnimationEntity],
         synchronize: true, // Setting synchronize: true shouldn't be used in production - otherwise you can lose production data.
@@ -33,13 +33,12 @@ import { AnimationEntity } from './animations/entities/animation.entity';
     UsersModule,
     AnimationsModule,
   ],
-  controllers: [AppController],
+  controllers: [],
   providers: [
-    AppService,
     {
       provide: APP_FILTER,
       useClass: SignupExceptionFilter,
     },
   ],
 })
-export class AppModule {}
+export class TestModule {}

@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
-import { CreateUserDto } from 'src/users/entities/create-user.dto';
+import { CreateUserDto } from '../users/entities/create-user.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('auth')

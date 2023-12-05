@@ -6,7 +6,7 @@ import { UseFilters } from '@nestjs/common';
 import { SignupExceptionFilter } from './signup.exception-filter';
 import { CreateUserDto } from './entities/create-user.dto';
 import { UpdateUserDto } from './entities/update-user.dto';
-import { encodePassword } from 'src/utils/bcrypt';
+import { encodePassword } from '../utils/bcrypt';
 import { Role } from './roles/role.enum';
 import { DevEntity } from './entities/dev.entity';
 import { AdminEntity } from './entities/admin.entity';
@@ -135,11 +135,42 @@ export class UsersService {
   }
 
   // DELETE user by id
-  async remove(id: number) {
-    return await this.userRepository.delete(id);
+  // async remove(id: number) {
+  //   return await this.userRepository.delete(id);
+  // }
+
+  async remove(id: number): Promise<{ message: string }> {
+    const user = await this.userRepository.findOne({ where: { id } });
+
+    if (user) {
+      const dev = await this.devRepository
+        .createQueryBuilder('dev')
+        .innerJoin('dev.user', 'user')
+        .where('user.id = :id', { id })
+        .getOne();
+
+      if (dev) {
+        // Delete the dev entity
+        await this.devRepository.delete(dev.id);
+      }
+
+      const admin = await this.adminRepository
+        .createQueryBuilder('admin')
+        .innerJoin('admin.user', 'user')
+        .where('user.id = :id', { id })
+        .getOne();
+
+      if (admin) {
+        // Delete the admin entity
+        await this.adminRepository.delete(admin.id);
+      }
+
+      // Delete the user entity
+      await this.userRepository.delete(user.id);
+
+      return { message: 'User and related entities deleted' };
+    }
+
+    throw new Error('User not found');
   }
-
-
-
-
 }

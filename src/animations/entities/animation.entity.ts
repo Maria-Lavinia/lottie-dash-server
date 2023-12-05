@@ -16,7 +16,7 @@ export class AnimationEntity {
   projectName: string;
 
   @IsNotEmpty()
-  @Column({ type: 'text' }) // Set nullable: false
+  @Column({ type: 'text' })
   jsonData: string;
 
   @ManyToOne(() => User, (user) => user.animations)

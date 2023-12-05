@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, ILike } from 'typeorm';
 import { AnimationEntity } from './entities/animation.entity';
-import { User } from 'src/users/entities/user.entity';
+import { User } from '../users/entities/user.entity';
 // import { HttpService } from '@nestjs/axios';
 import { CreateAnimationsDto } from './entities/create-animation.dto';
 
@@ -52,13 +52,13 @@ export class AnimationsService {
     return await this.animationRepository.delete(id);
   }
 
-  async filterByProjectName(projectName: string): Promise<AnimationEntity[]> {
-    return await this.animationRepository.find({
-      where: {
-        projectName: ILike(`%${projectName}%`),
-      },
-    });
-  }
+  // async filterByProjectName(projectName: string): Promise<AnimationEntity[]> {
+  //   return await this.animationRepository.find({
+  //     where: {
+  //       projectName: ILike(`%${projectName}%`),
+  //     },
+  //   });
+  // }
 
   async searchByFileName(fileName: string): Promise<AnimationEntity[]> {
     return await this.animationRepository.find({
@@ -66,5 +66,34 @@ export class AnimationsService {
         fileName: ILike(`%${fileName}%`), //case insensitive
       },
     });
+  }
+  async filterByProjectNameAndFileName(
+    projectName?: string,
+    fileName?: string,
+  ): Promise<AnimationEntity[]> {
+    console.log('Received parameters:', { projectName, fileName });
+
+    const whereClause: any = {};
+
+    if (projectName) {
+      whereClause.projectName = ILike(`%${projectName}%`);
+    }
+
+    if (fileName) {
+      whereClause.fileName = ILike(`%${fileName}%`);
+    }
+
+    try {
+      const result = await this.animationRepository.find({
+        where: whereClause,
+      });
+
+      console.log('Query result:', result);
+
+      return result;
+    } catch (error) {
+      console.error('Error in filterByProjectNameAndFileName:', error);
+      throw error;
+    }
   }
 }
