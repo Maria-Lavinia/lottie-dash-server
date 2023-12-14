@@ -21,10 +21,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  // app.enableCors();
-  app.enableCors({
-    origin: 'https://lottie-dash-app.vercel.app/' || 'http://localhost:3000',
-  });
+  app.enableCors();
   await app.listen(3005);
 }
 bootstrap();
