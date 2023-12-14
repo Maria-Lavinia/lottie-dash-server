@@ -28,14 +28,14 @@ export class User {
   @Column()
   lastName: string;
 
+  @Column({ type: 'enum', enum: Role, default: Role.User })
+  role: Role | null;
+
   @OneToOne((type) => DevEntity, (dev) => dev.user)
   dev: DevEntity | null;
 
   @OneToOne((type) => AdminEntity, (admin) => admin.user)
   admin: AdminEntity | null;
-
-  @Column({ type: 'enum', enum: Role, default: Role.User })
-  role: Role | null;
 
   @OneToMany((type) => AnimationEntity, (animations) => animations)
   animations: AnimationEntity[];
