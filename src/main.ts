@@ -23,7 +23,7 @@ async function bootstrap() {
 
   // app.enableCors();
   app.enableCors({
-    origin: 'https://lottie-dash-app.vercel.app/',
+    origin: 'https://lottie-dash-app.vercel.app/' || 'http://localhost:3000',
     credentials: true,
   });
   await app.listen(3005);
