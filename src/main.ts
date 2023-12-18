@@ -5,8 +5,6 @@ import {
   NestExpressApplication,
 } from '@nestjs/platform-express';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { createServer, proxy } from 'aws-serverless-express';
-import createHandler from '@vercel/node';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(
@@ -24,9 +22,6 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   app.enableCors({ origin: '*', methods: '*', allowedHeaders: '*' });
-  // await app.listen(process.env.PORT || 3005);
+  await app.listen(process.env.PORT || 3005);
 }
-// bootstrap();
-const nestApp = bootstrap();
-const server = createServer(proxy(nestApp));
-export const handler = createHandler({ app: server });
+bootstrap();
