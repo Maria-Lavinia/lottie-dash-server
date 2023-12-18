@@ -17,5 +17,10 @@
                 "DELETE"
             ]
         }
-    ]
+    ],
+    "functions": {
+        "api/main": {
+            "handler": "src/main.handler"
+        }
+    }
 }
