@@ -30,6 +30,8 @@
     "@nestjs/platform-express": "^10.2.8",
     "@nestjs/swagger": "^7.1.16",
     "@nestjs/typeorm": "^10.0.0",
+    "@vercel/node": "^3.0.12",
+    "aws-serverless-express": "^3.4.0",
     "bcrypt": "^5.1.1",
     "class-validator": "^0.14.0",
     "multer": "^1.4.5-lts.1",
