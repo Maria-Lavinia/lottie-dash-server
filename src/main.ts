@@ -11,6 +11,7 @@ async function bootstrap() {
     AppModule,
     new ExpressAdapter(),
   );
+
   const config = new DocumentBuilder()
     .setTitle('Frankly Lottie Dashboard API')
     .setDescription(

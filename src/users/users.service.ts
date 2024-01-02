@@ -51,7 +51,7 @@ export class UsersService {
     dev.name = createUserDto.firstName;
     dev.email = createUserDto.email;
     dev.user = savedUser;
-    console.log('tenant entity', dev);
+    console.log('dev entity', dev);
     return this.devRepository.save(dev);
   }
 
@@ -133,11 +133,6 @@ export class UsersService {
     const updated = Object.assign(toUpdate, updateUserDto);
     return await this.userRepository.save(updated);
   }
-
-  // DELETE user by id
-  // async remove(id: number) {
-  //   return await this.userRepository.delete(id);
-  // }
 
   async remove(id: number): Promise<{ message: string }> {
     const user = await this.userRepository.findOne({ where: { id } });

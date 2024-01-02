@@ -52,14 +52,6 @@ export class AnimationsService {
     return await this.animationRepository.delete(id);
   }
 
-  // async filterByProjectName(projectName: string): Promise<AnimationEntity[]> {
-  //   return await this.animationRepository.find({
-  //     where: {
-  //       projectName: ILike(`%${projectName}%`),
-  //     },
-  //   });
-  // }
-
   async searchByFileName(fileName: string): Promise<AnimationEntity[]> {
     return await this.animationRepository.find({
       where: {
