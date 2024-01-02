@@ -80,7 +80,9 @@ export class UsersService {
 
     const admin = new AdminEntity();
     admin.name = createUserDto.firstName;
+    admin.email = createUserDto.email;
     admin.user = savedUser;
+    console.log('admin entity', admin);
     return this.adminRepository.save(admin);
   }
 
@@ -103,14 +105,6 @@ export class UsersService {
       where: { id: id },
     });
   }
-
-  // // GET user by email
-  // async findOne(username: string): Promise<User> {
-  //   const result = await this.userRepository.findOne({
-  //     where: { email: username },
-  //   });
-  //   return result;
-  // }
 
   //  GET user by id
   findOneUser(id: number) {

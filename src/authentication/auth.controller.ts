@@ -17,13 +17,14 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('/signupdev')
-  async signupTenant(@Req() req, @Body() createUserDto: CreateUserDto) {
+  async signupDev(@Req() req, @Body() createUserDto: CreateUserDto) {
     console.log(createUserDto);
     return this.authService.signupDev(createUserDto);
   }
 
   @Post('/signupadmin')
-  async signupBoardMember(@Req() req, @Body() createUserDto: CreateUserDto) {
+  async signupAdmin(@Req() req, @Body() createUserDto: CreateUserDto) {
+    console.log(createUserDto);
     return this.authService.signupAdmin(createUserDto);
   }
 
