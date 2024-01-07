@@ -59,33 +59,4 @@ export class AnimationsService {
       },
     });
   }
-  async filterByProjectNameAndFileName(
-    projectName?: string,
-    fileName?: string,
-  ): Promise<AnimationEntity[]> {
-    console.log('Received parameters:', { projectName, fileName });
-
-    const whereClause: any = {};
-
-    if (projectName) {
-      whereClause.projectName = ILike(`%${projectName}%`);
-    }
-
-    if (fileName) {
-      whereClause.fileName = ILike(`%${fileName}%`);
-    }
-
-    try {
-      const result = await this.animationRepository.find({
-        where: whereClause,
-      });
-
-      console.log('Query result:', result);
-
-      return result;
-    } catch (error) {
-      console.error('Error in filterByProjectNameAndFileName:', error);
-      throw error;
-    }
-  }
 }

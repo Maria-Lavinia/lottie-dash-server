@@ -8,7 +8,6 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { JwtAuthGuard } from 'src/authentication/jwt-auth.guard';
 import { UpdateUserDto } from './entities/update-user.dto';
 import { ApiTags } from '@nestjs/swagger';
 
@@ -22,7 +21,6 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  // @UseGuards(JwtAuthGuard)
   @Get(':id')
   findOneUser(@Param('id') id: string) {
     return this.usersService.findOneUser(+id);

@@ -14,7 +14,6 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
-import { AuthGuard } from '@nestjs/passport';
 import { AnimationsService } from './animations.service';
 import { CreateAnimationsDto } from './entities/create-animation.dto';
 import { readFile } from 'fs/promises';
@@ -36,7 +35,7 @@ export class AnimationsController {
   @UseInterceptors(
     FileInterceptor('jsonData', {
       storage: diskStorage({
-        destination: './uploads/animations', // specify your upload directory
+        destination: './uploads/animations', // upload directory
         filename: (_, file, callback) => {
           const randomName = Array(32)
             .fill(null)
@@ -51,8 +50,6 @@ export class AnimationsController {
     try {
       console.log('Received request body:', body);
       const userId = body?.userId;
-
-      // Perform null or undefined checks for other properties
       const fileName = body?.fileName;
       const projectName = body?.projectName;
 
@@ -61,11 +58,8 @@ export class AnimationsController {
       console.log('projectName:', projectName);
 
       if (userId && fileName && projectName && file) {
-        // Create a new AnimationEntity and associate it with the user
         const jsonDataBuffer = await readFile(file.path);
         const jsonData = jsonDataBuffer.toString();
-
-        // Create a new AnimationEntity and associate it with the user
         const createAnimationsDto = new CreateAnimationsDto(
           fileName,
           projectName,
@@ -111,23 +105,8 @@ export class AnimationsController {
     return this.animationsService.findAllByUserId(req.params.id);
   }
 
-  // @Get('filter/projectName')
-  // findByProjectName(@Query('projectName') projectName: string) {
-  //   return this.animationsService.filterByProjectName(projectName);
-  // }
-
   @Get('search/fileName')
   findByFileName(@Query('fileName') fileName: string) {
     return this.animationsService.searchByFileName(fileName);
-  }
-  @Get('search')
-  filterByProjectNameAndFileName(
-    @Query('fileName') fileName?: string,
-    @Query('projectName') projectName?: string,
-  ) {
-    return this.animationsService.filterByProjectNameAndFileName(
-      fileName,
-      projectName,
-    );
   }
 }
