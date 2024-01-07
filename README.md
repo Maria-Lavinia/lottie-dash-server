@@ -36,7 +36,7 @@ $ npm install
 
 ## Running the app
 
-````bash
+```bash
 # development
 $ npm run start
 
@@ -47,15 +47,29 @@ $ npm run start:dev
 
 ## Test
 
-```bash
 # e2e tests
 $ npm run test:e2e
 
-````
+```
 
 ## Swagger
 
-- Can be accessed at: http://localhost:3005/api
+- Can be accessed at after staring the server: http://localhost:3005/api
+
+## Postgres
+
+- Suggest creating a database using Postgres in order for the server to be running properly.
+- You would need a .env file containing the following:
+
+```bash
+DB_HOST=
+DB_PORT=
+DB_USERNAME=
+DB_PASSWORD=
+DB_DATABASE=
+```
+
+- Fill in with your own credentials.
 
 ## Support
 
