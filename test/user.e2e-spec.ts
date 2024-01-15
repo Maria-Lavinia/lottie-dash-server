@@ -7,6 +7,10 @@ import { Connection, Repository } from 'typeorm';
 
 import { User } from '../src/users/entities/user.entity';
 import { CreateUserDto } from '../src/users/entities/create-user.dto';
+import { AuthService } from '../src/authentication/auth.service';
+import { UsersService } from '../src/users/users.service';
+import { JwtStrategy } from '../src/authentication/jwt.startegy';
+import { LocalStrategy } from '../src/authentication/local.strategy';
 
 describe('UserController (e2e)', () => {
   let app: INestApplication;
@@ -17,6 +21,7 @@ describe('UserController (e2e)', () => {
   beforeEach(async () => {
     moduleFixture = await Test.createTestingModule({
       imports: [TestModule],
+      providers: [AuthService, UsersService, LocalStrategy, JwtStrategy],
     }).compile();
 
     userRepository = moduleFixture.get(getRepositoryToken(User));
