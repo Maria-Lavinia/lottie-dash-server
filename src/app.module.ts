@@ -24,6 +24,9 @@ import { AnimationEntity } from './animations/entities/animation.entity';
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
         autoLoadEntities: true,
+        extra: {
+          ssl: true,
+        },
         entities: [User, AnimationEntity],
         synchronize: true, // Setting synchronize: true shouldn't be used in production - otherwise you can lose production data.
       }),
