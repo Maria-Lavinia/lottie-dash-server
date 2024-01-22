@@ -54,7 +54,7 @@ $ npm run test:e2e
 
 ## Swagger
 
-- Can be accessed at after staring the server: http://localhost:3005/api
+- Can be accessed at after staring the server: http://localhost:3005/api or https://lottie-dash-server.azurewebsites.net/api
 
 ## Postgres
 
